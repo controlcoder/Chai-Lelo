@@ -1,9 +1,20 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function Home() {
+  // const { data: session, status } = useSession();
+  // if (status === "unauthenticated") {
+  //   return redirect("/");
+  // }
+
+  // if (!session) {
+  //   return <p>Loading...</p>;
+  // }
+
   return (
     <main className="min-h-screen bg-orange-50 flex flex-col items-center justify-center text-gray-800">
       <section className="flex flex-col md:flex-row items-center justify-between w-full px-10 py-16 max-w-6xl">

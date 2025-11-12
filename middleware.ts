@@ -1,33 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
-import { verifyCookie } from "./lib/cookies";
+// export { auth as middleware } from "@/auth";
 
-export async function middleware(req: NextRequest) {
-  // console.log(req.nextUrl.origin);
-  // console.log("cookie:", req.cookies.get("sid"));
-  // console.log(req.nextUrl.pathname);
+import { NextRequest } from "next/server";
 
-  const sid_key = req.cookies.get("sid");
-  if (!sid_key) {
-    if (
-      req.nextUrl.pathname === "/accounts/login" ||
-      req.nextUrl.pathname === "/accounts/register"
-    )
-      return NextResponse.next();
-    else return Response.redirect(new URL("/", req.nextUrl.origin));
-  } else {
-    const token = sid_key.value || "";
-    const payload = await verifyCookie(token);
-    if (!payload) {
-      return NextResponse.next();
-    }
-    if (
-      req.nextUrl.pathname === "/accounts/login" ||
-      req.nextUrl.pathname === "/accounts/register"
-    )
-      return Response.redirect(new URL("/home", req.nextUrl.origin));
+export default function (req: NextRequest) {
+  console.log(1 ,req.cookies.get("authjs.session-token"));
+  if (!req.cookies.get("authjs.session-token")) {
+    if (req.nextUrl.pathname !== "/accounts/login")
+      return Response.redirect(new URL("/", req.nextUrl.origin));
   }
 }
 
 export const config = {
-  matcher: ["/home/:path*", "/admin/:path*", "/accounts/:path*"],
+  matcher: ["/accounts/login", "/home/:path*"],
 };

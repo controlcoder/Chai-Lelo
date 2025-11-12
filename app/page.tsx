@@ -16,13 +16,7 @@ export default function HomePage() {
           href="/accounts/login"
           className="px-6 py-3 bg-orange-600 text-white rounded-lg shadow hover:bg-orange-700 transition"
         >
-          Login
-        </Link>
-        <Link
-          href="/accounts/register"
-          className="px-6 py-3 bg-white border border-orange-600 text-orange-700 rounded-lg shadow hover:bg-orange-100 transition"
-        >
-          Register
+          Login to continue
         </Link>
       </div>
 
